@@ -16,7 +16,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void AddNewspaper_WithValidNewspaper_AddsCurrentAdModelReferenceToAdsCollectionInTheAddedNewspaper()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var detailViewModel = new NewspaperDetailViewModel(repository);
             var paperCollectionViewModel = new NewspaperCollectionViewModel(repository);
             var paperModel1 = new Newspaper() {Name = "New paper 1"};
@@ -44,7 +44,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void RemoveNewspaper_WithExistingPaperInPapersCollection_RemovesCurrentAdReferenceFromPaperAdsCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var detailViewModel = new NewspaperDetailViewModel(repository);
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             var paperModel1 = new Newspaper() {Name = "New paper 1"};
@@ -77,9 +77,9 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
 
         #region Utility Routines
 
-        private static INewspaperRepository GetNewspaperRepository()
+        private static INewspaperAdRepository GetNewspaperRepository()
         {
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             repository.GetAllAdvertisements().Returns(new List<Advertisement>());
             return repository;
         }

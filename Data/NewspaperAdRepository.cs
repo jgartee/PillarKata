@@ -5,7 +5,7 @@ using Models;
 
 namespace Data
 {
-    public class NewspaperRepository : INewspaperRepository
+    public class NewspaperAdRepository : INewspaperAdRepository
     {
         #region Instance fields
 
@@ -17,7 +17,7 @@ namespace Data
 
         #region Constructors
 
-        public NewspaperRepository(NewspaperCache newspaperCache, ISerializer<NewspaperCache> serializer)
+        public NewspaperAdRepository(NewspaperCache newspaperCache, ISerializer<NewspaperCache> serializer)
         {
             _serializer = serializer;
             _newspaperCache = newspaperCache;

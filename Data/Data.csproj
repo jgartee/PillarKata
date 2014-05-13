@@ -45,7 +45,7 @@
     <Compile Include="AdvertisementCache.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="NewspaperCache.cs" />
-    <Compile Include="NewspaperRepository.cs" />
+    <Compile Include="NewspaperAdRepository.cs" />
     <Compile Include="NewspaperSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -17,7 +17,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void AddItemCommand_WhenInvoked_SendsMessageOfTypeAddingItemMessage()
         {
             var msgSent = false;
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             Messenger.Default.Register<AddingAdvertisementItemMessage>(this, (message) => { msgSent = true; });
             //	Act
             var viewModel = new AdvertisementDetailViewModel(repository);
@@ -31,7 +31,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void AddNewspaper_WithValidNewspaper_AddsAdvertisementToNewspaperAdvertisementssCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var advertisementModel = new Advertisement();
             var paperModel = new Newspaper();
             var newspaperItemViewModel = new NewspaperItemViewModel(repository) {Model = paperModel};
@@ -49,7 +49,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void AddNewspaper_WithValidNewspaper_AddsNewspaperToNewspapersCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var advertisementModel = new Advertisement();
             var paperModel = new Newspaper();
             var newspaperItemViewModel = new NewspaperItemViewModel(repository) {Model = paperModel};
@@ -69,7 +69,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
             //	Arrange
             var msgSent = false;
             // AdvertisementDetailViewModelReady msg = null;
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             Messenger.Default.Register<AdvertisementDetailViewModelReady>(this, (message) => { msgSent = true; });
 
             //	Act
@@ -83,7 +83,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void CancelCommand_WhenInvoked_ResetsNameToCollectionCurrentValue()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             repository.GetAllAdvertisements().Returns(new List<Advertisement>());
             var detailViewModel = new AdvertisementDetailViewModel(repository);
             var collectionViewModel = new AdvertisementCollectionViewModel(repository);
@@ -109,7 +109,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void Name_WhenNotNullOrEmpty_SetsAllowAddToTrue()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model = new Advertisement();
             var itemViewModel = new AdvertisementItemViewModel(repository) {Model = model};
 
@@ -124,7 +124,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void Name_WhenNullOrEmpty_SetsAllowSaveToFalse()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model = new Advertisement();
             var itemViewModel = new AdvertisementItemViewModel(repository) {Model = model};
             var viewModel = new AdvertisementDetailViewModel(repository) {ItemViewModel = itemViewModel};
@@ -141,7 +141,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void RemoveNewspaper_WithExistingNewspaperInNewspapersCollection_RemovesAdvertisementFromNewspaperRemoved()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var advertisementModel = new Advertisement();
             var paperModel1 = new Newspaper();
             var newspaperItemViewModel1 = new NewspaperItemViewModel(repository) {Model = paperModel1};
@@ -166,7 +166,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void RemoveNewspaper_WithExistingNewspaperInNewspapersCollection_RemovesNewspaperFromNewspapersCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var advertisementModel = new Advertisement();
             var paperModel1 = new Newspaper();
             var newspaperItemViewModel1 = new NewspaperItemViewModel(repository) {Model = paperModel1};
@@ -190,7 +190,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void SaveCommand_WhenInvoked_UpdatesCollectionCurrentItemWithNewValue()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             repository.GetAllAdvertisements().Returns(new List<Advertisement>());
             var detailViewModel = new AdvertisementDetailViewModel(repository);
             var collectionViewModel = new AdvertisementCollectionViewModel(repository);
@@ -215,9 +215,9 @@ namespace PillarKata.ViewModels.Tests.UnitTests
 
         #region Utility Routines
 
-        private static INewspaperRepository GetNewspaperRepository()
+        private static INewspaperAdRepository GetNewspaperRepository()
         {
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             repository.GetAllAdvertisements().Returns(new List<Advertisement>());
             return repository;
         }

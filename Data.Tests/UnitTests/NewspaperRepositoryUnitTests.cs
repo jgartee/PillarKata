@@ -22,7 +22,7 @@ namespace Data.Tests.Unit_Tests
             var serializer = Substitute.For<ISerializer<NewspaperCache>>();
 
             //	Act
-            var repository = new NewspaperRepository(cache,serializer);
+            var repository = new NewspaperAdRepository(cache,serializer);
 
             //	Assert
             serializer.Received().RestoreCache(cache);
@@ -242,11 +242,11 @@ namespace Data.Tests.Unit_Tests
 
         #region Utility Routines
 
-        private NewspaperRepository GetBasicNewspaperRepository()
+        private NewspaperAdRepository GetBasicNewspaperRepository()
         {
             var cache = new NewspaperCache();
             var serializer = Substitute.For<ISerializer<NewspaperCache>>();
-            var repo = new NewspaperRepository(cache, serializer);
+            var repo = new NewspaperAdRepository(cache, serializer);
             return repo;
         }
 

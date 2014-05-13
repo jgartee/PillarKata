@@ -20,7 +20,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void Name_AccessedWhenModelNotPresent_ThrowsMissingModelException()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var vm = new AdvertisementItemViewModel(repository);
             vm.Model.Should().BeNull("Because vm.Model not set during object instantiation.");
 
@@ -77,7 +77,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void Name_SetWhenModelNotPresent_ThrowsMissingModelException()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var vm = new AdvertisementItemViewModel(repository);
             vm.Model.Should().BeNull("Because vm.Model not set during object instantiation.");
 
@@ -173,7 +173,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void Text_AccessedWhenModelNotPresent_ThrowsMissingModelException()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var vm = new AdvertisementItemViewModel(repository);
             vm.Model.Should().BeNull("Because vm.Model not set during object instantiation.");
 
@@ -449,18 +449,18 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         #region Utility Setup Routines
 
         private AdvertisementItemViewModel GetValidAdvertisementItemViewModel(Advertisement advertisement = null,
-                                                                              INewspaperRepository repository = null)
+                                                                              INewspaperAdRepository adRepository = null)
         {
             var model = advertisement ?? new Advertisement() {Name = "<New Advertisement>", Text="<New Advertisement body text."};
-            var repo = repository ?? Substitute.For<INewspaperRepository>();
+            var repo = adRepository ?? Substitute.For<INewspaperAdRepository>();
             return new AdvertisementItemViewModel(repo) {Model = model};
         }
 
         private NewspaperItemViewModel GetValidNewspaperItemViewModel(Newspaper paper = null,
-                                                                      INewspaperRepository repository = null)
+                                                                      INewspaperAdRepository adRepository = null)
         {
             var model = paper ?? new Newspaper() { Name = "<New Newspaper>" };
-            var repo = repository ?? Substitute.For<INewspaperRepository>();
+            var repo = adRepository ?? Substitute.For<INewspaperAdRepository>();
             return new NewspaperItemViewModel(repo) { Model = model };
         }
 

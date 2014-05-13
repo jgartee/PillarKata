@@ -14,7 +14,7 @@ namespace PillarKata.ViewModels
     {
         #region Instance fields
 
-        private readonly INewspaperRepository _repository;
+        private readonly INewspaperAdRepository _adRepository;
         private AdvertisementItemViewModel _itemViewModel;
         private string _name;
         private string _text = "";
@@ -25,9 +25,9 @@ namespace PillarKata.ViewModels
 
         private NewspaperItemViewModel _currentNewspaper;
 
-        public AdvertisementDetailViewModel(INewspaperRepository repository)
+        public AdvertisementDetailViewModel(INewspaperAdRepository adRepository)
         {
-            _repository = repository;
+            _adRepository = adRepository;
             Newspapers = new ObservableCollection<NewspaperItemViewModel>();
             Messenger.Default.Register<CurrentAdvertisementItemChangedMessage>(this, (message) =>
                                                                                      {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public interface INewspaperRepository : IRepository<Newspaper,Guid>
+    public interface INewspaperAdRepository : IRepository<Newspaper,Guid>
     {
         void DeleteAdvertisement(Advertisement entity);
         Advertisement GetAdvertisement(Guid id);

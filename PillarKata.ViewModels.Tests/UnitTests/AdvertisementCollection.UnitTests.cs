@@ -412,9 +412,9 @@ namespace PillarKata.ViewModels.Tests.UnitTests
             collectionViewModel.CurrentItem.Should().Be(paperItemVm1, "The current item is now");
         }
 
-        private static INewspaperRepository GetNewspaperRepository()
+        private static INewspaperAdRepository GetNewspaperRepository()
         {
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             repository.GetAllAdvertisements().Returns(new List<Advertisement>());
             return repository;
         }

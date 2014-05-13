@@ -17,7 +17,7 @@ namespace PillarKata.ViewModels
     {
         #region Instance fields
 
-        private readonly INewspaperRepository _repository;
+        private readonly INewspaperAdRepository _adRepository;
         private NewspaperItemViewModel _currentItem;
         private bool inSave;
 
@@ -25,13 +25,13 @@ namespace PillarKata.ViewModels
 
         #region Constructors
 
-        public NewspaperCollectionViewModel(INewspaperRepository repository)
+        public NewspaperCollectionViewModel(INewspaperAdRepository adRepository)
         {
-            _repository = repository;
+            _adRepository = adRepository;
             Newspapers = new ObservableCollection<NewspaperItemViewModel>();
 
-            var newspapers = _repository.Find(n => n != null).ToList().OrderBy(paper => paper.Name).ToList();
-            newspapers.ForEach(n => Newspapers.Add(new NewspaperItemViewModel(_repository) {Model = n}));
+            var newspapers = _adRepository.Find(n => n != null).ToList().OrderBy(paper => paper.Name).ToList();
+            newspapers.ForEach(n => Newspapers.Add(new NewspaperItemViewModel(_adRepository) {Model = n}));
 
             Newspapers.CollectionChanged += NewspapersCollectionChanged;
             SaveCommand = new RelayCommand<NewspaperItemViewModel>(SaveCommandHandler);
@@ -75,7 +75,7 @@ namespace PillarKata.ViewModels
         private void AddingNewspaperItemMessageHandler(AddingNewspaperItemMessage message)
         {
             var model = new Newspaper();
-            var vm = new NewspaperItemViewModel(_repository) {Model = model};
+            var vm = new NewspaperItemViewModel(_adRepository) {Model = model};
             Newspapers.Add(vm);
             var sortedNewspapers = Newspapers.OrderBy(n => n.Name).ToList();
             Newspapers.Clear();
@@ -131,7 +131,7 @@ namespace PillarKata.ViewModels
                     foreach (NewspaperItemViewModel vm in e.NewItems)
                     {
                         CurrentItem = vm;
-                        _repository.Save(vm.Model);
+                        _adRepository.Save(vm.Model);
                     }
                 }
             }
@@ -150,7 +150,7 @@ namespace PillarKata.ViewModels
                         var unlinkedAds = deletedPaper.Advertisements.ToList();
 
                         unlinkedAds.ForEach(a => a.Newspapers.Remove(deletedPaper));
-                        _repository.Save(deletedPaper.Model);
+                        _adRepository.Save(deletedPaper.Model);
                     }
                 }
             }
@@ -168,7 +168,7 @@ namespace PillarKata.ViewModels
                 return;
 
             inSave = true;
-            _repository.Save(viewModel.Model);
+            _adRepository.Save(viewModel.Model);
             var sortedList = Newspapers.OrderBy(n => n.Name).ToList();
             Newspapers.Clear();
             sortedList.ForEach(n => Newspapers.Add(n));
@@ -188,7 +188,7 @@ namespace PillarKata.ViewModels
             if (paperItem != null)
             {
                 CurrentItem = (NewspaperItemViewModel) (obj.NewValue) ??
-                              new NewspaperItemViewModel(_repository) {Model = new Newspaper()};
+                              new NewspaperItemViewModel(_adRepository) {Model = new Newspaper()};
                 Messenger.Default.Send(new CurrentNewspaperItemChangedMessage(CurrentItem));
             }
         }

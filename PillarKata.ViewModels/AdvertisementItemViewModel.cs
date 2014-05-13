@@ -14,7 +14,7 @@ namespace PillarKata.ViewModels
     {
         #region Instance fields
 
-        private readonly INewspaperRepository _repository;
+        private readonly INewspaperAdRepository _adRepository;
         private Advertisement _model;
         private ObservableCollection<NewspaperItemViewModel> _newspapers;
 
@@ -22,9 +22,9 @@ namespace PillarKata.ViewModels
 
         #region Constructors
 
-        public AdvertisementItemViewModel(INewspaperRepository repository)
+        public AdvertisementItemViewModel(INewspaperAdRepository adRepository)
         {
-            _repository = repository;
+            _adRepository = adRepository;
             _newspapers = new ObservableCollection<NewspaperItemViewModel>();
             _newspapers.CollectionChanged += Newspapers_CollectionChanged;
         }

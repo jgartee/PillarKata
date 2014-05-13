@@ -23,7 +23,7 @@ namespace Data.Tests.Integration_Tests
             File.Delete(fileName ?? "NewspaperData.txt");
             var serializer = new NewspaperSerializer();
             var cache = new NewspaperCache();
-            var repository = new NewspaperRepository(cache, serializer);
+            var repository = new NewspaperAdRepository(cache, serializer);
 
             papers.ForEach(repository.Save);
 
@@ -45,7 +45,7 @@ namespace Data.Tests.Integration_Tests
             cache.Values.ToList().Should().BeEmpty("The cache should be empty");
 
             //  Act
-            repository = new NewspaperRepository(cache, serializer);
+            repository = new NewspaperAdRepository(cache, serializer);
 
             //  Assert
             cache.Values.Count.Should().Be(cacheCount, cacheCount + " items should be in the cache");

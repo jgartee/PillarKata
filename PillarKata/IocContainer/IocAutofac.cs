@@ -26,7 +26,7 @@ namespace PillarKata.IocContainer
             builder.RegisterType<NewspaperCache>().AsSelf().SingleInstance();
             builder.RegisterType<AdvertisementCache>().AsSelf().SingleInstance();
 //            builder.RegisterType<NewspaperRepository>().As<IRepository<Newspaper, Guid>>().SingleInstance();
-            builder.RegisterType<NewspaperRepository>().As<INewspaperRepository>().SingleInstance();
+            builder.RegisterType<NewspaperAdRepository>().As<INewspaperAdRepository>().SingleInstance();
             builder.RegisterType<MainWindowViewModel>().AsSelf();
             builder.RegisterType<NewspaperItemViewModel>().AsSelf();
             builder.RegisterType<NewspaperDetailViewModel>().AsSelf();

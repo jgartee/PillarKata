@@ -19,7 +19,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void AddingItemMessageHandler_WhenInvoked_CallsRepositorySaveWithNewItem()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var message = new AddingNewspaperItemMessage();
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             collectionViewModel.Newspapers.Count.Should().Be(0, "There are no items in the collection initially.");
@@ -35,7 +35,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void AddingItemMessage_WhenReceived_AddsNewNewspaperToCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var detailViewModel = new NewspaperDetailViewModel(repository);
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             var countBeforeAdd = collectionViewModel.Newspapers.Count;
@@ -52,7 +52,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         [Fact]
         public void DeleteCommand_WhenItemDeletedFromTheCollection_CallsRepositoryDelete()
         {
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             repository.GetAllAdvertisements().Returns(new List<Advertisement>());
             bool deleteCalled;
             Newspaper deletedModel;
@@ -80,7 +80,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void SaveCommand_WhenInvoked_CallsRepositorySaveOnCurrentItem()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var saveCalled = false;
             Newspaper savedModel;
 
@@ -104,7 +104,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void SaveCommand_WhenItemAdded_CallsRepositorySaveOnCurrentItem()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
             var model3 = new Newspaper {Name = "Paper 3"};
@@ -131,7 +131,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void SavingItemMessageHandler_WhenInvoked_CallsRepositorySaveOnCurrentItem()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var paperItemVm1 = new NewspaperItemViewModel(repository) {Model = model1};
             var collectionViewModel = new NewspaperCollectionViewModel(repository);

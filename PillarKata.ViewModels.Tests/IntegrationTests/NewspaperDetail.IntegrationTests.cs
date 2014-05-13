@@ -17,7 +17,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void AddAdvertisement_WithValidAd_AddsCurrentNewspaperItemToNewspapersCollectionInTheAddedAd()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var detailViewModel = new NewspaperDetailViewModel(repository);
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             var paperModel1 = new Newspaper() {Name = "New paper 1"};
@@ -45,7 +45,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void AddItemCommand_WhenInvokedAgainstEmptyNewspapersCollection_ReturnsItemViewModelAsCurrentItemInCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var detailViewModel = new NewspaperDetailViewModel(repository);
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
 
@@ -62,7 +62,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         {
             //	Arrange
             var messageSent = false;
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             Messenger.Default.Register<NewspaperDetailViewModelReady>(this, (newspaperReady) => { messageSent = true; });
 
             //	Act
@@ -76,7 +76,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void NewspaperDetailItem_WhenNewspaperCurrentItemChangedMessageReceived_ResetsItemViewModelToValueSentInMessage()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var detailViewModel = new NewspaperDetailViewModel(repository);
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             var paperModel1 = new Newspaper() {Name = "New paper 1"};
@@ -98,7 +98,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void RemoveAdvertisement_WithExistingAdvInAdsCollection_RemovesCurrentNewspaperReferenceFromAdNewspapersCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var detailViewModel = new NewspaperDetailViewModel(repository);
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             var paperModel1 = new Newspaper() {Name = "New paper 1"};
@@ -131,7 +131,7 @@ namespace PillarKata.ViewModels.Tests.IntegrationTests
         public void SaveCommand_WhenInvoked_UpdatesNewspaperNameInCollectionCurrentItem()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var detailViewModel = new NewspaperDetailViewModel(repository);
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             detailViewModel.AddItemCommand.Execute(null);

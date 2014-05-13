@@ -22,7 +22,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void AddingItemMessageHandler_WhenInvoked_AddsNewItemToNewspapersCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var message = new AddingNewspaperItemMessage();
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             collectionViewModel.Newspapers.Count.Should().Be(0, "There are no items in the collection initially.");
@@ -39,7 +39,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void AddingItemMessageHandler_WhenInvoked_SendsCurrentItemChangedMessage()
         {
             //  Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var message = new AddingNewspaperItemMessage();
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
             var changedMessageReceived = false;
@@ -64,7 +64,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void CurrentItem_AfterDeletingLastItemOnNewspapersCollection_SetToLastItemInNewspapersCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
             var model3 = new Newspaper {Name = "Paper 3"};
@@ -89,7 +89,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void CurrentItem_AfterDeletingNotLastExistingItem_IsTheFollowingItem()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
             var model3 = new Newspaper {Name = "Paper 3"};
@@ -118,7 +118,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         {
             //	Arrange
 
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model = new Newspaper();
             var itemViewModel = new NewspaperItemViewModel(repository) {Model = model};
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
@@ -134,7 +134,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void CurrentItem_WhenItemDeletedThatIsNotInTheCollection_DoesNothing()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
             var model3 = new Newspaper {Name = "Paper 3"};
@@ -160,7 +160,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void DetailViewModelReadyMessageHandler_WhenReceived_SendsCurrentItemAsCurrentItemChangedMessage()
         {
             //  Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
             var model3 = new Newspaper {Name = "Paper 3"};
@@ -189,7 +189,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void Newspapers_AddNewItem_InsertsItemInTheCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var paperItemVm1 = new NewspaperItemViewModel(repository) {Model = model1};
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
@@ -207,7 +207,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void Newspapers_DeleteExistingItem_RemovesItemFromCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
             var model3 = new Newspaper {Name = "Paper 3"};
@@ -232,7 +232,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void RemovingItemMessageHandler_WhenInvoked_CallsRepositoryDeleteWithDeletedItem()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
 
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
@@ -263,7 +263,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void RemovingItemMessageHandler_WhenInvoked_RemovesItemFromNewspapersCollection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
 
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
@@ -298,7 +298,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
             //	Arrange
             var itemChangedMessageReceived = false;
             NewspaperItemViewModel changedItemViewModel = null;
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
 
             var model1 = new Newspaper {Name = "Paper 1"};
             var model2 = new Newspaper {Name = "Paper 2"};
@@ -337,7 +337,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         {
             //	Arrange
             var saveCommandCalled = false;
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var paperItemVm1 = new NewspaperItemViewModel(repository) {Model = model1};
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
@@ -355,7 +355,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void SelectedItemChangedHandler_WhenCollectionChanged_IsCalled()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var collectionChangedCalled = false;
             var model1 = new Newspaper {Name = "Paper 1"};
             var paperItemVm1 = new NewspaperItemViewModel(repository) {Model = model1};
@@ -405,7 +405,7 @@ namespace PillarKata.ViewModels.Tests.UnitTests
         public void SelectedItemChangedHandler_WhenInvoked_SetsCurrentItemToNewSelection()
         {
             //	Arrange
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             var model1 = new Newspaper {Name = "Paper 1"};
             var paperItemVm1 = new NewspaperItemViewModel(repository) {Model = model1};
             var collectionViewModel = new NewspaperCollectionViewModel(repository);
@@ -422,9 +422,9 @@ namespace PillarKata.ViewModels.Tests.UnitTests
 
         #region Utility Routines
 
-        private static INewspaperRepository GetNewspaperRepository()
+        private static INewspaperAdRepository GetNewspaperRepository()
         {
-            var repository = Substitute.For<INewspaperRepository>();
+            var repository = Substitute.For<INewspaperAdRepository>();
             repository.GetAllAdvertisements().Returns(new List<Advertisement>());
             return repository;
         }
