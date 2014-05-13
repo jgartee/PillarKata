@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="PillarKata.NewspaperTreeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF45"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    DataContext="{Binding Source={StaticResource Locator}, Path=NewspaperCollection}"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300">
+    <UserControl.Resources>
+        <HierarchicalDataTemplate x:Key="NewspaperTemplate"
+            ItemsSource="{Binding Advertisements}">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="NewspaperImage"
+                        Source="images\news.png"
+                        Height="40"
+                        Width="40" />
+                    <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Height="{Binding ElementName=NewspaperImage, Path=ActualHeight}">
+                        <TextBlock Text="{Binding Name}"
+                            Margin="5"
+                            Height="{Binding ElementName=NewspaperImage, Path=ActualHeight}" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <HierarchicalDataTemplate.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="AdvertisementImage"
+                                Source="images\ad.png"
+                                Height="40"
+                                Width="40" />
+                            <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                Height="{Binding ElementName=AdvertisementImage, Path=ActualHeight}">
+                                <TextBlock Text="{Binding Name}"
+                                    Margin="5"
+                                    Height="{Binding ElementName=AdvertisementImage, Path=ActualHeight}" />
+                                <TextBlock Text="{Binding Text}"
+                                    Margin="5"
+                                    Height="{Binding ElementName=AdvertisementImage, Path=ActualHeight}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                </DataTemplate>
+            </HierarchicalDataTemplate.ItemTemplate>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <TreeView x:Name="PaperTree"
+            ItemsSource="{Binding Newspapers}"
+            Margin="5,3,5,7"
+            DisplayMemberPath="Name"
+            SelectedValuePath="{Binding CurrentItem}"
+            AllowDrop="True"
+            ItemTemplate="{Binding Source={StaticResource NewspaperTemplate}}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <cmd:EventToCommand Command="{Binding SelectedItemChangedCommand}"
+                        PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="KeyDown">
+                    <cmd:EventToCommand Command="{Binding DeleteCommand}"
+                        PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TreeView>
+
+    </Grid>
+</UserControl>
